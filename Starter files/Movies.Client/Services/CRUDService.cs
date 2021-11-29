@@ -79,9 +79,10 @@ namespace Movies.Client.Services
         {
             var movieToCreate = new MovieForCreation()
             {
-                Title = "Gatsby",
-                Description = "The Great Gatsby yada yada yada",
-                DirectorId = Guid.Parse("aad2582e-8816-42c7-b4c7-c8e03784a17d"), 
+                Title = "Reservoir Dogs",
+                Description = "After a simple jewelry heist goes terribly wrong, the " +
+                  "surviving criminals begin to suspect that one of them is a police informant.",
+                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"),
                 ReleaseDate = new DateTimeOffset(new DateTime(1992, 9, 2)),
                 Genre = "Crime, Drama"
             };
@@ -95,15 +96,15 @@ namespace Movies.Client.Services
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode(); 
+            response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
             var createdMovie = JsonSerializer.Deserialize<Movie>(content,
-                 new JsonSerializerOptions()
-                 {
-                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                 });
+               new JsonSerializerOptions
+               {
+                   PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+               });
 
         }
     }
