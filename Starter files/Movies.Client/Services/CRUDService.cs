@@ -139,5 +139,17 @@ namespace Movies.Client.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
         }
+
+        public async Task DeleteResource()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete,
+                "api/movies/d28888e9-2ba9-473a-a40f-e38cb54f9b35");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+        }
     }
 }
